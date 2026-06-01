@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://davcn.github.io/trailcox/sitemap.xml
