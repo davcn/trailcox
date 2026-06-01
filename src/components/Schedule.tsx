@@ -29,18 +29,18 @@ export function Schedule({ lang }: ScheduleProps) {
           {t.pendingNote}
         </p>
 
-        <ol className="relative flex flex-col md:flex-row md:items-start gap-0" aria-label="Programa del evento">
+        {/* Mobile: vertical timeline */}
+        <ol className="flex flex-col gap-6 md:hidden" aria-label="Programa del evento">
           {scheduleItems.map((item, index) => (
-            <li key={item.time} className="relative flex md:flex-col flex-1 items-start md:items-center">
-              {/* Connector line */}
+            <li key={item.time} className="relative flex items-start gap-5">
+              {/* Vertical connector */}
               {index < scheduleItems.length - 1 && (
                 <div
-                  className="hidden md:block absolute top-5 w-full h-px"
-                  style={{ backgroundColor: "var(--color-border)", left: "50%" }}
+                  className="absolute top-10 bottom-0 w-px"
+                  style={{ backgroundColor: "var(--color-border)", left: "2.25rem" }}
                   aria-hidden="true"
                 />
               )}
-
               {/* Time bubble */}
               <div className="relative z-10 flex-shrink-0">
                 <div
@@ -54,13 +54,45 @@ export function Schedule({ lang }: ScheduleProps) {
                   {item.time}
                 </div>
               </div>
-
               {/* Content */}
-              <div className="md:text-center px-2 pt-3 flex flex-col gap-1 ml-4 md:ml-0">
+              <div className="pt-2 flex flex-col gap-1">
+                <span className="font-medium" style={{ color: "var(--color-text)" }}>
+                  {lang === "es" ? item.es : item.en}
+                </span>
+                {item.pending && <span className="pending-tag w-fit">Por confirmar</span>}
+              </div>
+            </li>
+          ))}
+        </ol>
+
+        {/* Desktop: horizontal timeline */}
+        <ol className="hidden md:flex md:items-start gap-0" aria-label="Programa del evento">
+          {scheduleItems.map((item, index) => (
+            <li key={item.time} className="relative flex flex-col flex-1 items-center">
+              {index < scheduleItems.length - 1 && (
+                <div
+                  className="absolute top-5 w-full h-px"
+                  style={{ backgroundColor: "var(--color-border)", left: "50%" }}
+                  aria-hidden="true"
+                />
+              )}
+              <div className="relative z-10 flex-shrink-0">
+                <div
+                  className="w-[4.5rem] h-10 rounded-lg flex items-center justify-center font-display text-lg"
+                  style={{
+                    backgroundColor: item.pending ? "var(--color-surface)" : "rgba(215,255,55,0.12)",
+                    color: item.pending ? "var(--color-muted)" : "var(--color-accent)",
+                    border: `1px solid ${item.pending ? "var(--color-border)" : "rgba(215,255,55,0.3)"}`,
+                  }}
+                >
+                  {item.time}
+                </div>
+              </div>
+              <div className="text-center px-2 pt-3 flex flex-col gap-1">
                 <span className="font-medium text-sm" style={{ color: "var(--color-text)" }}>
                   {lang === "es" ? item.es : item.en}
                 </span>
-                {item.pending && <span className="pending-tag w-fit md:mx-auto">Por confirmar</span>}
+                {item.pending && <span className="pending-tag w-fit mx-auto">Por confirmar</span>}
               </div>
             </li>
           ))}

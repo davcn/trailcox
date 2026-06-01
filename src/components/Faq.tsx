@@ -32,8 +32,8 @@ export function Faq({ lang }: FaqProps) {
               className="glass-card group"
             >
               <summary
-                className="flex items-center justify-between gap-4 px-6 py-4 cursor-pointer list-none font-medium"
-                style={{ color: "var(--color-text)" }}
+                className="flex items-center justify-between gap-4 px-6 py-4 cursor-pointer font-medium text-left w-full"
+                style={{ color: "var(--color-text)", listStyle: "none", WebkitAppearance: "none" }}
               >
                 <span>{lang === "es" ? item.esQuestion : item.enQuestion}</span>
                 <svg
