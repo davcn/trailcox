@@ -1,5 +1,17 @@
 @import "tailwindcss";
 
+/* Remove native details/summary marker across all browsers */
+details > summary {
+  list-style: none;
+  text-align: left;
+}
+details > summary::-webkit-details-marker {
+  display: none;
+}
+details > summary::marker {
+  display: none;
+}
+
 :root {
   --color-bg: #050509;
   --color-bg-soft: #0c0c12;
