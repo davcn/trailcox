@@ -10,12 +10,12 @@ function isPlaceholderUrl(url: string): boolean {
 }
 
 const GALLERY_IMAGES = [
-  { src: "https://live.staticflickr.com/65535/55221183298_d6fe00cb16_z.jpg", alt: "Trail runners en carrera" },
-  { src: "https://live.staticflickr.com/65535/55221427755_d99b3f9790_z.jpg", alt: "Trail runners en carrera" },
-  { src: "https://live.staticflickr.com/65535/55221183783_11ca2b6daa_z.jpg", alt: "Trail runners en carrera" },
-  { src: "https://live.staticflickr.com/65535/55221024991_6df6f1dc1d_z.jpg", alt: "Trail runners en carrera" },
-  { src: "https://live.staticflickr.com/65535/55221023871_d090f6b6fc_z.jpg", alt: "Trail runners en carrera" },
-  { src: "https://live.staticflickr.com/65535/55221025796_515826dcfc_z.jpg", alt: "Trail runners en carrera" },
+  { src: "https://live.staticflickr.com/65535/55221183298_d6fe00cb16_z.jpg", alt: "Corredores en la salida de la carrera de montaña Trail Cox", width: 640, height: 427 },
+  { src: "https://live.staticflickr.com/65535/55221427755_d99b3f9790_z.jpg", alt: "Participantes corriendo por la sierra de Cox durante la carrera nocturna", width: 640, height: 427 },
+  { src: "https://live.staticflickr.com/65535/55221183783_11ca2b6daa_z.jpg", alt: "Corredor de trail ascendiendo por el recorrido de Trail Cox", width: 640, height: 427 },
+  { src: "https://live.staticflickr.com/65535/55221024991_6df6f1dc1d_z.jpg", alt: "Grupo de corredores en la carrera de montaña de Cox, Alicante", width: 640, height: 427 },
+  { src: "https://live.staticflickr.com/65535/55221023871_d090f6b6fc_z.jpg", alt: "Corredor cruzando la meta en la carrera de trail de Cox", width: 640, height: 427 },
+  { src: "https://live.staticflickr.com/65535/55221025796_515826dcfc_z.jpg", alt: "Ambiente en la carrera de trail nocturna de Cox, Alicante", width: 640, height: 427 },
 ];
 
 export function GallerySection({ lang }: GallerySectionProps) {
@@ -54,27 +54,27 @@ export function GallerySection({ lang }: GallerySectionProps) {
         >
           {/* Large feature: col 1-2, row 1 */}
           <div style={{ gridColumn: "1 / 3", gridRow: "1" }} className="overflow-hidden rounded-xl">
-            <img src={GALLERY_IMAGES[0].src} alt={GALLERY_IMAGES[0].alt} loading="lazy"
+            <img src={GALLERY_IMAGES[0].src} alt={GALLERY_IMAGES[0].alt} width={GALLERY_IMAGES[0].width} height={GALLERY_IMAGES[0].height} loading="lazy"
               className="w-full h-full object-cover transition-transform duration-500 hover:scale-105" />
           </div>
           {/* Top right */}
           <div style={{ gridColumn: "3", gridRow: "1" }} className="overflow-hidden rounded-xl">
-            <img src={GALLERY_IMAGES[1].src} alt={GALLERY_IMAGES[1].alt} loading="lazy"
+            <img src={GALLERY_IMAGES[1].src} alt={GALLERY_IMAGES[1].alt} width={GALLERY_IMAGES[1].width} height={GALLERY_IMAGES[1].height} loading="lazy"
               className="w-full h-full object-cover transition-transform duration-500 hover:scale-105" />
           </div>
           {/* Bottom left */}
           <div style={{ gridColumn: "1", gridRow: "2" }} className="overflow-hidden rounded-xl">
-            <img src={GALLERY_IMAGES[2].src} alt={GALLERY_IMAGES[2].alt} loading="lazy"
+            <img src={GALLERY_IMAGES[2].src} alt={GALLERY_IMAGES[2].alt} width={GALLERY_IMAGES[2].width} height={GALLERY_IMAGES[2].height} loading="lazy"
               className="w-full h-full object-cover transition-transform duration-500 hover:scale-105" />
           </div>
           {/* Bottom middle */}
           <div style={{ gridColumn: "2", gridRow: "2" }} className="overflow-hidden rounded-xl">
-            <img src={GALLERY_IMAGES[3].src} alt={GALLERY_IMAGES[3].alt} loading="lazy"
+            <img src={GALLERY_IMAGES[3].src} alt={GALLERY_IMAGES[3].alt} width={GALLERY_IMAGES[3].width} height={GALLERY_IMAGES[3].height} loading="lazy"
               className="w-full h-full object-cover transition-transform duration-500 hover:scale-105" />
           </div>
           {/* Bottom right */}
           <div style={{ gridColumn: "3", gridRow: "2" }} className="overflow-hidden rounded-xl">
-            <img src={GALLERY_IMAGES[4].src} alt={GALLERY_IMAGES[4].alt} loading="lazy"
+            <img src={GALLERY_IMAGES[4].src} alt={GALLERY_IMAGES[4].alt} width={GALLERY_IMAGES[4].width} height={GALLERY_IMAGES[4].height} loading="lazy"
               className="w-full h-full object-cover transition-transform duration-500 hover:scale-105" />
           </div>
         </div>

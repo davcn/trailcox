@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { useLanguage } from "./hooks/useLanguage";
 import { Header } from "./components/Header";
 import { Hero } from "./components/Hero";
@@ -16,6 +17,14 @@ import { Footer } from "./components/Footer";
 
 export default function App() {
   const { lang, setLang } = useLanguage();
+
+  useEffect(() => {
+    document.documentElement.lang = lang;
+    document.title =
+      lang === "es"
+        ? "Trail Cox | Carrera de montaña nocturna en Cox, Alicante"
+        : "Trail Cox | Night trail race in Cox, Alicante";
+  }, [lang]);
 
   return (
     <>
