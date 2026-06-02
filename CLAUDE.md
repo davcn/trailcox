@@ -29,4 +29,12 @@ If your Claude Code/OpenSpec setup uses the expanded workflow, you can review fi
 - Prioritize mobile responsiveness.
 - Add reduced-motion fallback for animated ticker and scroll video.
 - The site must work without a backend.
-```
+
+## Testing Requirements
+
+- Run `npm test` (Vitest) before every commit. All tests must pass.
+- Run `npm run test:e2e` (Playwright) before every commit. All tests must pass.
+- Any code change that affects component behaviour, copy, or user-facing logic must be accompanied by new or updated tests.
+- Unit/integration tests live in `src/__tests__/` and use Vitest + React Testing Library.
+- E2E tests live in `tests/e2e/` and use Playwright (chromium + mobile-chrome).
+- Do not commit if either test suite is red.
