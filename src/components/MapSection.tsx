@@ -11,6 +11,7 @@ function isPlaceholderUrl(url: string): boolean {
 
 export function MapSection({ lang }: MapSectionProps) {
   const t = copy[lang].route;
+  const tc = copy[lang].common;
   const mapMissing = isPlaceholderUrl(siteConfig.mapEmbedUrl);
   const externalMapMissing = isPlaceholderUrl(siteConfig.mapExternalUrl);
 
@@ -63,7 +64,7 @@ export function MapSection({ lang }: MapSectionProps) {
                     </div>
                     {stat.pending && (
                       <span className="pending-tag mt-1 block w-fit">
-                        {lang === "es" ? "Por confirmar" : "To be confirmed"}
+                        {tc.pending}
                       </span>
                     )}
                   </div>

@@ -7,6 +7,7 @@ interface RunnerGuideProps {
 
 export function RunnerGuide({ lang }: RunnerGuideProps) {
   const t = copy[lang].runnerGuide;
+  const tc = copy[lang].common;
 
   return (
     <section
@@ -44,7 +45,7 @@ export function RunnerGuide({ lang }: RunnerGuideProps) {
               <p className="text-sm flex-1" style={{ color: "var(--color-muted)" }}>
                 {lang === "es" ? card.esBody : card.enBody}
               </p>
-              {card.pending && <span className="pending-tag w-fit">Por confirmar</span>}
+              {card.pending && <span className="pending-tag w-fit">{tc.pending}</span>}
             </div>
           ))}
         </div>

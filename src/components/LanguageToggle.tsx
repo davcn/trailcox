@@ -24,7 +24,7 @@ export function LanguageToggle({ lang, setLang }: LanguageToggleProps) {
       >
         ES
       </button>
-      <span className="text-[var(--color-border)] select-none">|</span>
+      <span className="select-none" style={{ color: "var(--color-muted)" }} aria-hidden="true">|</span>
       <button
         onClick={() => setLang("en")}
         aria-pressed={lang === "en"}

@@ -122,8 +122,8 @@ export function Hero({ lang }: HeroProps) {
         <div className="flex flex-wrap justify-center gap-3">
           {[
             { icon: "📍", text: "Cox, Alicante" },
-            { icon: "🌙", text: lang === "es" ? "Nocturno" : "Night race" },
-            { icon: "🏔️", text: lang === "es" ? "Trail + Senderismo" : "Trail + Walking" },
+            { icon: "🌙", text: t.badgeNight },
+            { icon: "🏔️", text: t.badgeModalities },
           ].map((chip) => (
             <span
               key={chip.text}

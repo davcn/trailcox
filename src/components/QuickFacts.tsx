@@ -49,7 +49,7 @@ export function QuickFacts({ lang }: QuickFactsProps) {
           className="font-display text-3xl md:text-4xl mb-10"
           style={{ color: "var(--color-text)" }}
         >
-          {lang === "es" ? "El evento" : "The event"}
+          {t.title}
         </h2>
 
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">

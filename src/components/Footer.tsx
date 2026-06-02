@@ -58,9 +58,9 @@ export function Footer({ lang }: FooterProps) {
               ) : (
                 <span
                   className="text-sm"
-                  style={{ color: "var(--color-border)" }}
+                  style={{ color: "var(--color-muted)" }}
                 >
-                  Instagram (próximamente)
+                  {t.instagramComingSoon}
                 </span>
               )}
               {siteConfig.facebookUrl ? (

@@ -64,7 +64,7 @@ export function GallerySection({ lang }: GallerySectionProps) {
           {/* Prev / Next buttons */}
           <button
             onClick={prev}
-            aria-label={lang === "es" ? "Imagen anterior" : "Previous image"}
+            aria-label={t.prevImage}
             className="absolute left-3 top-1/2 -translate-y-1/2 flex items-center justify-center w-10 h-10 rounded-full glass-card-strong transition-colors hover:border-[rgba(255,255,255,0.3)]"
             style={{ color: "var(--color-text)" }}
           >
@@ -74,7 +74,7 @@ export function GallerySection({ lang }: GallerySectionProps) {
           </button>
           <button
             onClick={next}
-            aria-label={lang === "es" ? "Imagen siguiente" : "Next image"}
+            aria-label={t.nextImage}
             className="absolute right-3 top-1/2 -translate-y-1/2 flex items-center justify-center w-10 h-10 rounded-full glass-card-strong transition-colors hover:border-[rgba(255,255,255,0.3)]"
             style={{ color: "var(--color-text)" }}
           >
@@ -99,7 +99,7 @@ export function GallerySection({ lang }: GallerySectionProps) {
               key={i}
               role="tab"
               aria-selected={i === current}
-              aria-label={`${lang === "es" ? "Imagen" : "Image"} ${i + 1}`}
+              aria-label={`${t.imageLabel} ${i + 1}`}
               onClick={() => setCurrent(i)}
               className="rounded-full transition-all flex items-center justify-center"
               style={{

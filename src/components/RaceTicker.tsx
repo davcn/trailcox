@@ -81,7 +81,8 @@ export function RaceTicker() {
             {i < TERMS.length - 1 && (
               <span
                 className="ml-5"
-                style={{ color: "var(--color-border)" }}
+                style={{ color: "var(--color-muted)" }}
+                aria-hidden="true"
               >
                 ✦
               </span>

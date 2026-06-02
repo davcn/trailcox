@@ -12,6 +12,7 @@ function isPlaceholderUrl(url: string): boolean {
 export function DiscoverCox({ lang }: DiscoverCoxProps) {
   const tArrive = copy[lang].arrive;
   const tDiscover = copy[lang].discover;
+  const tc = copy[lang].common;
   const externalMapMissing = isPlaceholderUrl(siteConfig.mapExternalUrl);
 
   return (
@@ -42,7 +43,7 @@ export function DiscoverCox({ lang }: DiscoverCoxProps) {
               <p className="text-sm" style={{ color: "var(--color-muted)" }}>
                 {tArrive.addressValue}
               </p>
-              <span className="pending-tag w-fit">Por confirmar</span>
+              <span className="pending-tag w-fit">{tc.pending}</span>
             </div>
 
             <div className="glass-card p-6 flex flex-col gap-3">
@@ -53,7 +54,7 @@ export function DiscoverCox({ lang }: DiscoverCoxProps) {
               <p className="text-sm" style={{ color: "var(--color-muted)" }}>
                 {tArrive.parkingValue}
               </p>
-              <span className="pending-tag w-fit">Por confirmar</span>
+              <span className="pending-tag w-fit">{tc.pending}</span>
             </div>
           </div>
 

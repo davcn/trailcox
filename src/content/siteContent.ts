@@ -26,6 +26,12 @@ export type Lang = "es" | "en";
 // ─────────────────────────────────────────────
 export const copy = {
   es: {
+    common: {
+      pending: "Por confirmar",
+      distance: "Distancia",
+      elevation: "Desnivel",
+      startTime: "Salida",
+    },
     nav: {
       home: "Inicio",
       race: "Carrera",
@@ -43,9 +49,12 @@ export const copy = {
         "Corre bajo las estrellas, sube hacia la historia y vive la sierra de Cox como nunca.",
       primaryCta: "Inscripciones",
       secondaryCta: "Ver recorrido",
+      badgeNight: "Nocturno",
+      badgeModalities: "Trail + Senderismo",
     },
     quickFacts: {
       sectionLabel: "Datos del evento",
+      title: "El evento",
       date: "Fecha",
       datePending: "Por confirmar",
       time: "Hora",
@@ -88,6 +97,9 @@ export const copy = {
       description: "Revive los mejores momentos de Trail Cox.",
       ctaButton: "Ver galería completa",
       comingSoon: "La galería estará disponible próximamente.",
+      prevImage: "Imagen anterior",
+      nextImage: "Imagen siguiente",
+      imageLabel: "Imagen",
     },
     runnerGuide: {
       sectionLabel: "Guía del corredor",
@@ -131,9 +143,16 @@ export const copy = {
       copyright: "Trail Cox. Todos los derechos reservados.",
       contactLabel: "Contacto",
       socialLabel: "Redes sociales",
+      instagramComingSoon: "Instagram (próximamente)",
     },
   },
   en: {
+    common: {
+      pending: "To be confirmed",
+      distance: "Distance",
+      elevation: "Elevation",
+      startTime: "Start",
+    },
     nav: {
       home: "Home",
       race: "Race",
@@ -151,9 +170,12 @@ export const copy = {
         "Run under the stars, climb into history and experience the Cox mountains like never before.",
       primaryCta: "Register",
       secondaryCta: "View route",
+      badgeNight: "Night race",
+      badgeModalities: "Trail + Walking",
     },
     quickFacts: {
       sectionLabel: "Event facts",
+      title: "The event",
       date: "Date",
       datePending: "To be confirmed",
       time: "Time",
@@ -196,6 +218,9 @@ export const copy = {
       description: "Relive the best moments of Trail Cox.",
       ctaButton: "View full gallery",
       comingSoon: "Gallery coming soon.",
+      prevImage: "Previous image",
+      nextImage: "Next image",
+      imageLabel: "Image",
     },
     runnerGuide: {
       sectionLabel: "Runner guide",
@@ -238,6 +263,7 @@ export const copy = {
       copyright: "Trail Cox. All rights reserved.",
       contactLabel: "Contact",
       socialLabel: "Social media",
+      instagramComingSoon: "Instagram (coming soon)",
     },
   },
 } as const;
@@ -257,8 +283,10 @@ export interface QuickFact {
 // ─────────────────────────────────────────────
 export interface RouteInfo {
   id: string;
-  distance: string;
-  elevation: string;
+  esDistance: string;
+  enDistance: string;
+  esElevation: string;
+  enElevation: string;
   difficulty: "easy" | "medium" | "hard";
   startTime: string;
   esTitle: string;
@@ -273,8 +301,10 @@ export interface RouteInfo {
 export const routes: RouteInfo[] = [
   {
     id: "trail",
-    distance: "Por confirmar",
-    elevation: "Por confirmar",
+    esDistance: "Por confirmar",
+    enDistance: "To be confirmed",
+    esElevation: "Por confirmar",
+    enElevation: "To be confirmed",
     difficulty: "hard",
     startTime: "21:00",
     esTitle: "Trail Competitivo",
@@ -289,8 +319,10 @@ export const routes: RouteInfo[] = [
   },
   {
     id: "senderismo",
-    distance: "Por confirmar",
-    elevation: "Por confirmar",
+    esDistance: "Por confirmar",
+    enDistance: "To be confirmed",
+    esElevation: "Por confirmar",
+    enElevation: "To be confirmed",
     difficulty: "easy",
     startTime: "21:05",
     esTitle: "Senderismo",

@@ -19,6 +19,7 @@ const DIFFICULTY_LABEL: Record<string, Record<string, string>> = {
 
 export function RouteCards({ lang }: RouteCardsProps) {
   const t = copy[lang].race;
+  const tc = copy[lang].common;
 
   return (
     <section
@@ -67,7 +68,7 @@ export function RouteCards({ lang }: RouteCardsProps) {
                   >
                     {diffLabel}
                   </span>
-                  {route.pending && <span className="pending-tag">Por confirmar</span>}
+                  {route.pending && <span className="pending-tag">{tc.pending}</span>}
                 </div>
 
                 {/* Title */}
@@ -100,9 +101,9 @@ export function RouteCards({ lang }: RouteCardsProps) {
                   style={{ borderColor: "var(--color-border)" }}
                 >
                   {[
-                    { label: lang === "es" ? "Distancia" : "Distance", value: route.distance },
-                    { label: lang === "es" ? "Desnivel" : "Elevation", value: route.elevation },
-                    { label: lang === "es" ? "Salida" : "Start", value: route.startTime },
+                    { label: tc.distance, value: lang === "es" ? route.esDistance : route.enDistance },
+                    { label: tc.elevation, value: lang === "es" ? route.esElevation : route.enElevation },
+                    { label: tc.startTime, value: route.startTime },
                   ].map(({ label, value }) => (
                     <div key={label} className="text-center">
                       <div

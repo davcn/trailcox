@@ -7,6 +7,7 @@ interface ScheduleProps {
 
 export function Schedule({ lang }: ScheduleProps) {
   const t = copy[lang].schedule;
+  const tc = copy[lang].common;
 
   return (
     <section
@@ -59,7 +60,7 @@ export function Schedule({ lang }: ScheduleProps) {
                 <span className="font-medium" style={{ color: "var(--color-text)" }}>
                   {lang === "es" ? item.es : item.en}
                 </span>
-                {item.pending && <span className="pending-tag w-fit">Por confirmar</span>}
+                {item.pending && <span className="pending-tag w-fit">{tc.pending}</span>}
               </div>
             </li>
           ))}
@@ -92,7 +93,7 @@ export function Schedule({ lang }: ScheduleProps) {
                 <span className="font-medium text-sm" style={{ color: "var(--color-text)" }}>
                   {lang === "es" ? item.es : item.en}
                 </span>
-                {item.pending && <span className="pending-tag w-fit mx-auto">Por confirmar</span>}
+                {item.pending && <span className="pending-tag w-fit mx-auto">{tc.pending}</span>}
               </div>
             </li>
           ))}
