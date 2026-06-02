@@ -6,7 +6,6 @@ import { RaceTicker } from "./components/RaceTicker";
 import { QuickFacts } from "./components/QuickFacts";
 import { RouteCards } from "./components/RouteCards";
 import { MapSection } from "./components/MapSection";
-import { ScrollVideo } from "./components/ScrollVideo";
 import { GallerySection } from "./components/GallerySection";
 import { RunnerGuide } from "./components/RunnerGuide";
 import { Schedule } from "./components/Schedule";
@@ -41,7 +40,6 @@ export default function App() {
         <QuickFacts lang={lang} />
         <RouteCards lang={lang} />
         <MapSection lang={lang} />
-        <ScrollVideo lang={lang} />
         <GallerySection lang={lang} />
         <RunnerGuide lang={lang} />
         <Schedule lang={lang} />
