@@ -101,13 +101,25 @@ export function GallerySection({ lang }: GallerySectionProps) {
               aria-selected={i === current}
               aria-label={`${lang === "es" ? "Imagen" : "Image"} ${i + 1}`}
               onClick={() => setCurrent(i)}
-              className="rounded-full transition-all"
+              className="rounded-full transition-all flex items-center justify-center"
               style={{
-                width: i === current ? "1.5rem" : "0.5rem",
-                height: "0.5rem",
-                backgroundColor: i === current ? "var(--color-accent)" : "var(--color-border)",
+                minWidth: "1.5rem",
+                minHeight: "1.5rem",
+                padding: "0.5rem",
+                backgroundColor: "transparent",
               }}
-            />
+            >
+              <span
+                style={{
+                  display: "block",
+                  width: i === current ? "1.5rem" : "0.5rem",
+                  height: "0.5rem",
+                  borderRadius: "9999px",
+                  backgroundColor: i === current ? "var(--color-accent)" : "var(--color-border)",
+                  transition: "width 0.2s",
+                }}
+              />
+            </button>
           ))}
         </div>
 

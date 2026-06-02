@@ -49,7 +49,7 @@ function PlaceholderCard({ label }: { label: string }) {
         className="w-16 h-6 rounded"
         style={{ backgroundColor: "var(--color-surface-strong)" }}
       />
-      <span className="text-xs tracking-widest uppercase" style={{ color: "var(--color-border)" }}>
+      <span className="text-xs tracking-widest uppercase" style={{ color: "var(--color-muted)" }}>
         {label}
       </span>
     </div>
