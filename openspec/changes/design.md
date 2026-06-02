@@ -224,16 +224,23 @@ Suggested route model:
 ```ts
 export type RouteInfo = {
   id: string;
-  distance: string;
-  elevation: string;
-  difficulty: string;
+  esDistance: string;
+  enDistance: string;
+  esElevation: string;
+  enElevation: string;
+  difficulty: "easy" | "medium" | "hard";
   startTime: string;
   esTitle: string;
   enTitle: string;
   esDescription: string;
   enDescription: string;
+  esTags: string[];
+  enTags: string[];
+  pending: boolean;
 };
 ```
+
+Note: `distance` and `elevation` are split into `esDistance`/`enDistance` and `esElevation`/`enElevation` to support per-language placeholder strings ("Por confirmar" / "To be confirmed") without inline ternaries in components.
 
 Suggested sponsor model:
 
@@ -431,9 +438,16 @@ Fallback rules:
 
 Design:
 
-- 3 to 6 image cards or abstract placeholders.
-- Strong CTA button.
-- External link icon or label.
+- Image carousel with previous/next arrow buttons and dot indicator navigation.
+- Dot indicators use a minimum 24×24px tap target (visual dot rendered as inner `<span>`).
+- Carousel counter (e.g. "1 / 6") displayed over the image.
+- Strong CTA button linking to the Flickr album.
+- External link icon.
+
+Accessibility:
+- Prev/next buttons use `aria-label` from `copy[lang].gallery.prevImage` / `nextImage`.
+- Dot buttons use `aria-label` from `copy[lang].gallery.imageLabel` + index.
+- Dot container uses `role="tablist"`.
 
 Spanish copy:
 
@@ -588,6 +602,48 @@ Only add JSON-LD Event if the date, location, organizer, and ticket/registration
 - Use optimized images when real assets are added.
 - Keep animation lightweight.
 
+## Translation Architecture
+
+All user-facing strings MUST live in the `copy` dictionary in `siteContent.ts`. Components MUST NOT contain hardcoded Spanish or English literals.
+
+### copy structure additions (beyond initial spec)
+
+```ts
+copy.es.common = {
+  pending: "Por confirmar",
+  distance: "Distancia",
+  elevation: "Desnivel",
+  startTime: "Salida",
+};
+
+copy.es.hero.badgeNight = "Nocturno";
+copy.es.hero.badgeModalities = "Trail + Senderismo";
+copy.es.quickFacts.title = "El evento";
+copy.es.gallery.prevImage = "Imagen anterior";
+copy.es.gallery.nextImage = "Imagen siguiente";
+copy.es.gallery.imageLabel = "Imagen";
+copy.es.footer.instagramComingSoon = "Instagram (próximamente)";
+```
+
+English equivalents follow the same keys.
+
+### Font loading
+
+Fonts are loaded non-blocking to reduce CLS and eliminate render-blocking:
+
+```html
+<link rel="preload" as="font" type="font/woff2" crossorigin href="...bebasneue...woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="...inter...woff2" />
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?..." />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?..." media="print" onload="this.media='all'" />
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?..." /></noscript>
+```
+
+### GitHub Pages deployment
+
+- Deploy with `npx gh-pages -d dist --nojekyll`.
+- The `--nojekyll` flag is required to serve files from the `assets/` directory on GitHub Pages.
+
 ## Implementation Checklist
 
 Before considering the feature complete, verify:
@@ -596,10 +652,14 @@ Before considering the feature complete, verify:
 - The page works on mobile.
 - Language switch works.
 - Registration link works.
-- Gallery link works or shows placeholder.
+- Gallery carousel works with real images.
+- Gallery link opens Flickr album.
 - Map embed works or shows placeholder.
-- Scroll video works or falls back.
 - Sponsor tiers render with and without data.
 - Keyboard navigation works.
 - Reduced motion behavior works.
 - No copied assets from reference websites are included.
+- No hardcoded translation strings in component JSX.
+- Lighthouse color contrast passes (all text uses `--color-muted` or higher contrast tokens, never `--color-border`).
+- Touch targets for interactive elements are at least 24×24px.
+- `.nojekyll` is present in the `gh-pages` branch.

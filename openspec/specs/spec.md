@@ -204,40 +204,26 @@ The system SHALL include a Recorrido / Route section with a mini Google Maps emb
 
 ### Requirement: Scroll-Controlled Video Section
 
-The system SHALL include a video section where video progress can advance according to scroll progress.
-
-#### Scenario: Desktop visitor scrolls through video section
-
-- GIVEN the visitor is using a device that supports scroll video behavior
-- AND the video metadata has loaded
-- WHEN the visitor scrolls through the video section
-- THEN the video current time SHALL update according to the visitor's scroll progress
-- AND the video SHALL remain muted
-- AND the video SHALL use `playsInline`
-- AND the video SHALL NOT autoplay with sound
-
-#### Scenario: Reduced motion visitor reaches video section
-
-- GIVEN the visitor has enabled reduced motion
-- WHEN the visitor reaches the video section
-- THEN the website SHALL NOT scrub the video automatically
-- AND the website SHALL show a poster image or simple playback fallback
-
-#### Scenario: Video asset is missing
-
-- GIVEN the final video source has not been configured
-- WHEN the video section renders
-- THEN the website SHALL show a designed placeholder explaining that the event video will be added soon
+The scroll-controlled video section has been removed. The `ScrollVideo.tsx` component exists in the codebase but is not rendered. This section may be reintroduced when a video asset is available.
 
 ### Requirement: Gallery Section
 
-The system SHALL include a gallery section linking to a configurable Google Drive folder.
+The system SHALL include a gallery section with an image carousel and a link to the external Flickr album.
+
+#### Scenario: Visitor navigates the carousel
+
+- GIVEN the gallery section is visible
+- WHEN the visitor clicks the previous or next carousel buttons
+- THEN the displayed image SHALL change accordingly
+- AND the buttons SHALL have accessible labels from the translation dictionary
+- AND the dot indicators SHALL reflect the current image
+- AND each dot button SHALL have a minimum 24×24px tap target
 
 #### Scenario: Visitor clicks gallery CTA
 
 - GIVEN the visitor sees the gallery section
 - WHEN the visitor clicks the gallery CTA
-- THEN the website SHALL open the configured Google Drive gallery URL in a new tab
+- THEN the website SHALL open the configured gallery URL in a new tab
 - AND the link SHALL use `target="_blank"`
 - AND the link SHALL use `rel="noopener noreferrer"`
 
@@ -360,6 +346,23 @@ The system SHALL centralize external URLs, event metadata, translatable copy, sp
 - GIVEN text content needs to change
 - WHEN a developer updates the Spanish or English copy dictionary
 - THEN the website SHALL render the updated copy consistently
+
+### Requirement: Translation Architecture
+
+The system SHALL store all user-facing strings in the `copy` dictionary in `siteContent.ts`. No translatable string SHALL be hardcoded as a literal inside component JSX.
+
+#### Scenario: Developer adds a new language
+
+- GIVEN a developer wants to add a third language (e.g. French)
+- WHEN the developer adds a new key to the `copy` object
+- THEN no component files SHALL need to be modified to surface the new language strings
+
+#### Scenario: Component renders a pending label
+
+- GIVEN an event detail is not yet confirmed
+- WHEN the component renders a pending badge
+- THEN the badge text SHALL come from `copy[lang].common.pending`
+- AND SHALL read "Por confirmar" in Spanish and "To be confirmed" in English
 
 ### Requirement: Accessibility
 

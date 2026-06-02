@@ -189,3 +189,32 @@
 - [x] 18.8 Confirm no copied reference-site assets are included.
 - [x] 18.9 Run `openspec validate build-trail-cox-website` if OpenSpec CLI is installed.
 - [x] 18.10 Update README/customization notes if implementation adds project-specific details.
+
+## 19. Post-Launch Fixes
+
+- [x] 19.1 Replace gallery grid with image carousel using real Flickr photos and a Flickr CTA.
+- [x] 19.2 Fix FAQ `<summary>` marker alignment across all browsers (`::-webkit-details-marker`, `::marker`).
+- [x] 19.3 Fix FAQ alignment and schedule timeline layout on mobile.
+- [x] 19.4 Remove scroll video section (video asset not available; section removed rather than left as permanent placeholder).
+- [x] 19.5 Add SEO improvements: Twitter card meta tags, `og:image` with width/height, `robots.txt`, `sitemap.xml`, `lang` attribute on `<html>`, descriptive `alt` texts on gallery images.
+
+## 20. Accessibility and Performance Audit (Lighthouse)
+
+- [x] 20.1 Fix color contrast violations: sponsor placeholder label changed from `--color-border` (1.53:1) to `--color-muted` (~7:1).
+- [x] 20.2 Fix color contrast: `LanguageToggle` separator `|` and `RaceTicker` decorators `✦` changed from `--color-border` to `--color-muted`; marked `aria-hidden="true"`.
+- [x] 20.3 Fix color contrast: footer "Instagram (próximamente)" placeholder changed from `--color-border` to `--color-muted`.
+- [x] 20.4 Fix touch target size: gallery dot indicator buttons enlarged to minimum 24×24px tap area; visual dot rendered as inner `<span>`.
+- [x] 20.5 Fix render-blocking fonts: Google Fonts loaded non-blocking via `media="print" onload` pattern; critical Bebas Neue and Inter woff2 files preloaded with `<link rel="preload">`.
+- [x] 20.6 Fix font-induced CLS: preloading Bebas Neue reduced hero layout shift from 0.128 to near zero.
+- [x] 20.7 Add `.nojekyll` to `gh-pages` branch to allow GitHub Pages to serve the `assets/` directory.
+
+## 21. i18n Architecture
+
+- [x] 21.1 Remove all hardcoded inline `lang === "es" ? "..." : "..."` string ternaries from components.
+- [x] 21.2 Add `common` section to `copy` for shared labels: `pending`, `distance`, `elevation`, `startTime`.
+- [x] 21.3 Add `hero.badgeNight` and `hero.badgeModalities` to both language dictionaries.
+- [x] 21.4 Add `quickFacts.title` to both language dictionaries.
+- [x] 21.5 Add `gallery.prevImage`, `gallery.nextImage`, `gallery.imageLabel` to both language dictionaries.
+- [x] 21.6 Add `footer.instagramComingSoon` to both language dictionaries.
+- [x] 21.7 Update `RouteInfo` model: replace `distance`/`elevation` strings with `esDistance`/`enDistance`/`esElevation`/`enElevation` for per-language values.
+- [x] 21.8 Ensure all components source strings exclusively from the `copy` dictionary — no literals in JSX.
