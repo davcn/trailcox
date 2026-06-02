@@ -1,12 +1,9 @@
+import { useState } from "react";
 import type { Lang } from "../content/siteContent";
 import { copy, siteConfig } from "../content/siteContent";
 
 interface GallerySectionProps {
   lang: Lang;
-}
-
-function isPlaceholderUrl(url: string): boolean {
-  return !url || url.startsWith("REPLACE_WITH");
 }
 
 const GALLERY_IMAGES = [
@@ -20,7 +17,11 @@ const GALLERY_IMAGES = [
 
 export function GallerySection({ lang }: GallerySectionProps) {
   const t = copy[lang].gallery;
-  const galleryMissing = isPlaceholderUrl(siteConfig.galleryUrl);
+  const [current, setCurrent] = useState(0);
+  const total = GALLERY_IMAGES.length;
+
+  const prev = () => setCurrent((i) => (i - 1 + total) % total);
+  const next = () => setCurrent((i) => (i + 1) % total);
 
   return (
     <section
@@ -38,77 +39,91 @@ export function GallerySection({ lang }: GallerySectionProps) {
         >
           {t.title}
         </h2>
-        <p className="text-base mb-10" style={{ color: "var(--color-muted)" }}>
+        <p className="text-base mb-8" style={{ color: "var(--color-muted)" }}>
           {t.description}
         </p>
 
-        {/* Preview grid — 3 cols, 2 rows, all cells explicitly placed */}
-        <div
-          className="mb-8"
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(3, 1fr)",
-            gridTemplateRows: "280px 280px",
-            gap: "0.75rem",
-          }}
-        >
-          {/* Large feature: col 1-2, row 1 */}
-          <div style={{ gridColumn: "1 / 3", gridRow: "1" }} className="overflow-hidden rounded-xl">
-            <img src={GALLERY_IMAGES[0].src} alt={GALLERY_IMAGES[0].alt} width={GALLERY_IMAGES[0].width} height={GALLERY_IMAGES[0].height} loading="lazy"
-              className="w-full h-full object-cover transition-transform duration-500 hover:scale-105" />
+        {/* Carousel */}
+        <div className="relative mb-6" aria-label="Galería de imágenes">
+          {/* Main image */}
+          <div className="overflow-hidden rounded-xl" style={{ height: "clamp(260px, 50vw, 560px)" }}>
+            {GALLERY_IMAGES.map((img, i) => (
+              <img
+                key={img.src}
+                src={img.src}
+                alt={img.alt}
+                width={img.width}
+                height={img.height}
+                loading={i === 0 ? "eager" : "lazy"}
+                className="w-full h-full object-cover transition-opacity duration-500 absolute inset-0"
+                style={{ opacity: i === current ? 1 : 0, pointerEvents: i === current ? "auto" : "none" }}
+              />
+            ))}
           </div>
-          {/* Top right */}
-          <div style={{ gridColumn: "3", gridRow: "1" }} className="overflow-hidden rounded-xl">
-            <img src={GALLERY_IMAGES[1].src} alt={GALLERY_IMAGES[1].alt} width={GALLERY_IMAGES[1].width} height={GALLERY_IMAGES[1].height} loading="lazy"
-              className="w-full h-full object-cover transition-transform duration-500 hover:scale-105" />
-          </div>
-          {/* Bottom left */}
-          <div style={{ gridColumn: "1", gridRow: "2" }} className="overflow-hidden rounded-xl">
-            <img src={GALLERY_IMAGES[2].src} alt={GALLERY_IMAGES[2].alt} width={GALLERY_IMAGES[2].width} height={GALLERY_IMAGES[2].height} loading="lazy"
-              className="w-full h-full object-cover transition-transform duration-500 hover:scale-105" />
-          </div>
-          {/* Bottom middle */}
-          <div style={{ gridColumn: "2", gridRow: "2" }} className="overflow-hidden rounded-xl">
-            <img src={GALLERY_IMAGES[3].src} alt={GALLERY_IMAGES[3].alt} width={GALLERY_IMAGES[3].width} height={GALLERY_IMAGES[3].height} loading="lazy"
-              className="w-full h-full object-cover transition-transform duration-500 hover:scale-105" />
-          </div>
-          {/* Bottom right */}
-          <div style={{ gridColumn: "3", gridRow: "2" }} className="overflow-hidden rounded-xl">
-            <img src={GALLERY_IMAGES[4].src} alt={GALLERY_IMAGES[4].alt} width={GALLERY_IMAGES[4].width} height={GALLERY_IMAGES[4].height} loading="lazy"
-              className="w-full h-full object-cover transition-transform duration-500 hover:scale-105" />
+
+          {/* Prev / Next buttons */}
+          <button
+            onClick={prev}
+            aria-label={lang === "es" ? "Imagen anterior" : "Previous image"}
+            className="absolute left-3 top-1/2 -translate-y-1/2 flex items-center justify-center w-10 h-10 rounded-full glass-card-strong transition-colors hover:border-[rgba(255,255,255,0.3)]"
+            style={{ color: "var(--color-text)" }}
+          >
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true">
+              <path d="M11 4 L6 9 L11 14" />
+            </svg>
+          </button>
+          <button
+            onClick={next}
+            aria-label={lang === "es" ? "Imagen siguiente" : "Next image"}
+            className="absolute right-3 top-1/2 -translate-y-1/2 flex items-center justify-center w-10 h-10 rounded-full glass-card-strong transition-colors hover:border-[rgba(255,255,255,0.3)]"
+            style={{ color: "var(--color-text)" }}
+          >
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true">
+              <path d="M7 4 L12 9 L7 14" />
+            </svg>
+          </button>
+
+          {/* Counter */}
+          <div
+            className="absolute bottom-3 right-4 text-xs font-semibold px-2 py-1 rounded glass-card"
+            style={{ color: "var(--color-muted)" }}
+          >
+            {current + 1} / {total}
           </div>
         </div>
 
-        {/* CTA */}
+        {/* Dot indicators */}
+        <div className="flex justify-center gap-2 mb-8" role="tablist" aria-label="Seleccionar imagen">
+          {GALLERY_IMAGES.map((_, i) => (
+            <button
+              key={i}
+              role="tab"
+              aria-selected={i === current}
+              aria-label={`${lang === "es" ? "Imagen" : "Image"} ${i + 1}`}
+              onClick={() => setCurrent(i)}
+              className="rounded-full transition-all"
+              style={{
+                width: i === current ? "1.5rem" : "0.5rem",
+                height: "0.5rem",
+                backgroundColor: i === current ? "var(--color-accent)" : "var(--color-border)",
+              }}
+            />
+          ))}
+        </div>
+
+        {/* Flickr CTA */}
         <div className="flex justify-center">
-          {galleryMissing ? (
-            <div
-              className="glass-card px-8 py-4 text-center"
-              style={{ color: "var(--color-muted)" }}
-            >
-              <span className="text-sm">{t.comingSoon}</span>
-            </div>
-          ) : (
-            <a
-              href={siteConfig.galleryUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn-primary px-10"
-            >
-              {t.ctaButton}
-              <svg
-                width="16"
-                height="16"
-                viewBox="0 0 16 16"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                aria-hidden="true"
-              >
-                <path d="M4 12 L12 4 M5 4 H12 V11" strokeLinecap="round" strokeLinejoin="round" />
-              </svg>
-            </a>
-          )}
+          <a
+            href={siteConfig.galleryUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn-primary px-10"
+          >
+            {t.ctaButton}
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
+              <path d="M4 12 L12 4 M5 4 H12 V11" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          </a>
         </div>
       </div>
     </section>
